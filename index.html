@@ -3,9 +3,64 @@
 <head>
 <meta charset="utf-8">
 <title>菜鸟教程(runoob.com)</title>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    /* 炫酷渐变背景 */
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: bgMove 12s ease infinite;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+h1{
+    /* 艺术字样式 */
+    font-family: "Microsoft YaHei", sans-serif;
+    font-size: 4rem;
+    color: #fff;
+    text-shadow: 0 0 10px #fff,0 0 20px #ff2d95,0 0 40px #ff2d95;
+    /* 文字出现动画 */
+    animation: textFadeIn 1.2s ease-out forwards;
+    opacity: 0;
+}
+p{
+    font-family: "Microsoft YaHei", sans-serif;
+    font-size: 2rem;
+    color: #fff;
+    text-shadow: 0 0 8px #fff,0 0 15px #23a6d5;
+    margin-top: 30px;
+    /* 延迟出现，错开动画 */
+    animation: textFadeIn 1.2s ease-out 0.5s forwards;
+    opacity: 0;
+}
+/* 背景流动动画 */
+@keyframes bgMove {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
+}
+/* 文字淡入+上浮动画 */
+@keyframes textFadeIn {
+    from{
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+</style>
 </head>
 <body>
     <h1>你好世界</h1>
-    <p>hello worldv。</p>
+    <p>hello world。</p>
 </body>
 </html>
