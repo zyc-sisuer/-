@@ -1,66 +1,128 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>菜鸟教程(runoob.com)</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23f472b6'/><stop offset='1' stop-color='%2322d3ee'/></linearGradient></defs><path fill='url(%23g)' d='M12 2l2.4 6.9L21 12l-6.6 3.1L12 22l-2.4-6.9L3 12l6.6-3.1z'/></svg>">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@300;500;700&display=swap">
 <style>
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+:root{
+  --bg:#070b18;
+  --cyan:#22d3ee;
+  --violet:#a78bfa;
+  --pink:#f472b6;
+  --amber:#fde68a;
+  --text:#eef2ff;
 }
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
 body{
-    /* 炫酷渐变背景 */
-    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 400% 400%;
-    animation: bgMove 12s ease infinite;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  font-family:"Noto Sans SC","Microsoft YaHei","PingFang SC",system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
 }
-h1{
-    /* 艺术字样式 */
-    font-family: "Microsoft YaHei", sans-serif;
-    font-size: 4rem;
-    color: #fff;
-    text-shadow: 0 0 10px #fff,0 0 20px #ff2d95,0 0 40px #ff2d95;
-    /* 文字出现动画 */
-    animation: textFadeIn 1.2s ease-out forwards;
-    opacity: 0;
+
+/* ===== 炫酷背景：流动极光 ===== */
+.aurora{
+  position:fixed;
+  inset:-20%;
+  background:
+    radial-gradient(38% 46% at 22% 28%, rgba(34,211,238,.38) 0%, transparent 70%),
+    radial-gradient(42% 50% at 78% 24%, rgba(139,92,246,.42) 0%, transparent 70%),
+    radial-gradient(46% 56% at 62% 78%, rgba(244,114,182,.34) 0%, transparent 70%),
+    radial-gradient(30% 42% at 28% 82%, rgba(251,191,36,.20) 0%, transparent 70%);
+  filter: blur(70px) saturate(1.15);
+  animation: auroraDrift 22s ease-in-out infinite alternate;
 }
-p{
-    font-family: "Microsoft YaHei", sans-serif;
-    font-size: 2rem;
-    color: #fff;
-    text-shadow: 0 0 8px #fff,0 0 15px #23a6d5;
-    margin-top: 30px;
-    /* 延迟出现，错开动画 */
-    animation: textFadeIn 1.2s ease-out 0.5s forwards;
-    opacity: 0;
+@keyframes auroraDrift{
+  0%  {transform:translate3d(-4%,-2%,0) rotate(-4deg) scale(1.05)}
+  50% {transform:translate3d(3%,3%,0) rotate(2deg) scale(1.12)}
+  100%{transform:translate3d(-2%,-4%,0) rotate(-2deg) scale(1)}
 }
-/* 背景流动动画 */
-@keyframes bgMove {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
+
+/* ===== 胶片噪点，增加质感 ===== */
+.grain{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.05;
+  mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='140' height='140'><filter id='g'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/></filter><rect width='140' height='140' filter='url(%23g)' opacity='0.6'/></svg>");
 }
-/* 文字淡入+上浮动画 */
-@keyframes textFadeIn {
-    from{
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to{
-        opacity: 1;
-        transform: translateY(0);
-    }
+
+/* ===== 内容区 ===== */
+.hero{
+  position:relative;
+  z-index:1;
+  text-align:center;
+  padding:24px;
+}
+.title{
+  font-family:"ZCOOL KuaiLe","STKaiti","KaiTi",cursive;
+  font-weight:400;
+  font-size:clamp(3.2rem, 14vw, 8.5rem);
+  line-height:1.15;
+  letter-spacing:.04em;
+  background:linear-gradient(120deg, var(--amber) 0%, var(--pink) 28%, var(--violet) 55%, var(--cyan) 78%, var(--amber) 100%);
+  background-size:200% 200%;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation: titleGradient 8s ease-in-out infinite alternate;
+  filter:drop-shadow(0 0 18px rgba(34,211,238,.30)) drop-shadow(0 0 36px rgba(244,114,182,.24));
+}
+@keyframes titleGradient{
+  0%  {background-position:0% 50%}
+  100%{background-position:100% 50%}
+}
+.char{
+  display:inline-block;
+  opacity:0;
+  animation:charIn .7s cubic-bezier(.22,1,.36,1) both;
+  animation-delay:calc(.18s + var(--i) * .12s);
+}
+@keyframes charIn{
+  0%  {opacity:0; transform:translateY(70px) scale(1.5) rotate(8deg); filter:blur(10px)}
+  100%{opacity:1; transform:none; filter:blur(0)}
+}
+.subtitle{
+  margin-top:1.2rem;
+  font-size:clamp(1rem, 2.6vw, 1.45rem);
+  font-weight:300;
+  letter-spacing:.35em;
+  padding-left:.35em;
+  color:rgba(238,242,255,.78);
+  opacity:0;
+  animation:fadeIn .9s ease .95s both;
+}
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(14px)}
+  to  {opacity:1; transform:none}
+}
+
+/* ===== 动效开关（无障碍） ===== */
+@media (prefers-reduced-motion: reduce){
+  .aurora,.title{animation:none}
+  .char{animation:none; opacity:1; transform:none; filter:none}
+  .subtitle{animation:none; opacity:1}
 }
 </style>
 </head>
 <body>
-    <h1>你好世界</h1>
-    <p>hello world。</p>
+  <div class="aurora" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <main class="hero">
+    <h1 class="title" aria-label="你好世界">
+      <span class="char" style="--i:0">你</span><span class="char" style="--i:1">好</span><span class="char" style="--i:2">世</span><span class="char" style="--i:3">界</span>
+    </h1>
+    <p class="subtitle">hello world。</p>
+  </main>
 </body>
 </html>
